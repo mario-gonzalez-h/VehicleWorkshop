@@ -16,6 +16,30 @@ public class Dealership {
         inventory = new ArrayList<>();
     }
 
+    public List<Vehicle> getVehiclesByPrice(double min, double max) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getPrice() >= min && vehicle.getPrice() <= max)
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getMake().equals(make) && vehicle.getModel().equals(model))
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByYear(int year) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getYear() == year)
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
     public String getName() {
         return name;
     }
