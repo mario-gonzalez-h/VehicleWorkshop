@@ -150,7 +150,7 @@ public class Interface {
             int lowestMileage = scanner.nextInt();
             System.out.println("Enter the highest mileage here. ");
             int highestMileage = scanner.nextInt();
-            dealership.getVehiclesByMileage(lowestMileage, highestMileage);
+            System.out.println(dealership.getVehiclesByMileage(lowestMileage, highestMileage));
             isEnabled = false;
         }
 
@@ -161,7 +161,7 @@ public class Interface {
             System.out.println("Filter Vehicle by Vehicle Type");
             System.out.println("Enter the vehicle type here (Ex: SUV/Van): ");
             String vehicleType = scanner.nextLine();
-            dealership.getVehiclesByType(vehicleType);
+            System.out.println(dealership.getVehiclesByType(vehicleType);
             isEnabled = false;
         }
     }
