@@ -7,33 +7,13 @@ public class Interface {
 
     private Dealership dealership;
 
-    private void init() {
-
-        Scanner userInput = new Scanner(System.in);
-
-        System.out.println("Enter your dealership's name:");
-
-        String dealershipName = userInput.nextLine();
-
-        System.out.println("Enter your dealership's address:");
-
-        String dealershipAddress = userInput.nextLine();
-
-        System.out.println("Enter your dealership's phone number:");
-
-        String dealershipPhoneNumber = userInput.nextLine();
-
-        this.dealership = new Dealership(dealershipName, dealershipAddress, dealershipPhoneNumber);
-
-        FileManager.saveDealership(dealership);
-
-    }
-
     public void homeScreen(){
 
-        init();
-
         while(true){
+
+            List<Dealership> dealerships = FileManager.getDealership();
+
+            this.dealership = dealerships.get(0);
 
             System.out.println("""
                                                _.-="_-         _
