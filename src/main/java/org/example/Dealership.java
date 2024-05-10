@@ -13,11 +13,63 @@ public class Dealership {
         this.name = name;
         this.address = address;
         this.phone = phone;
-        inventory = new ArrayList<>();
+        inventory = FileManager.getVehicles();
+    }
+
+    public List<Vehicle> getVehiclesByPrice(double min, double max) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getPrice() >= min && vehicle.getPrice() <= max)
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getMake().equals(make) && vehicle.getModel().equals(model))
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByYear(int year) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getYear() == year)
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByColor(String color) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getColor().equals(color))
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getOdometer() >= min && vehicle.getOdometer() <= max)
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByType(String type) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getVehicleType().equals(type))
+                vehicles.add(vehicle);
+        return vehicles;
     }
 
     public String getName() {
         return name;
+    }
+
+    public List<Vehicle> getInventory() {
+        return inventory;
     }
 
     public void setName(String name) {
