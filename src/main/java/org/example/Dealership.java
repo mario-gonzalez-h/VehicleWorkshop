@@ -145,5 +145,4 @@ public class Dealership {
             System.out.println("No vehicle was found with VIN " + vinToRemove + ".");
         }
     }
-
 }
