@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +85,25 @@ public class FileManager {
         for (Vehicle vehicle : vehicles){
             System.out.printf("%d | %d | %s | %s | %s | %s | %d | $%.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
         }
+    }
+
+    public static void writeVehicleToFile(Vehicle vehicle){
+
+        String filePath = "src/main/resources/inventory.csv";
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))){
+
+            writer.write(vehicle.getVin() + "|" + vehicle.getYear() + "|" + vehicle.getMake() + "|" + vehicle.getModel() + "|" + vehicle.getVehicleType() + "|" + vehicle.getColor() + "|" + vehicle.getOdometer() + "|" + vehicle.getPrice());
+
+            writer.newLine();
+
+            System.out.println("Added vehicle to the inventory!");
+
+        }catch(IOException ex){
+
+            System.out.println("Whoops, can't add that vehicle!");
+        }
+
     }
 
 }
