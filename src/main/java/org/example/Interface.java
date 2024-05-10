@@ -7,13 +7,19 @@ public class Interface {
 
     private Dealership dealership;
 
+    private void init(){
+
+        List<Dealership> dealerships = FileManager.getDealership();
+
+        this.dealership = dealerships.get(0);
+
+    }
+
     public void homeScreen(){
 
         while(true){
 
-            List<Dealership> dealerships = FileManager.getDealership();
-
-            this.dealership = dealerships.get(0);
+            init();
 
             System.out.println("""
                                                _.-="_-         _
