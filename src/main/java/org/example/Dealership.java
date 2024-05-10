@@ -40,6 +40,30 @@ public class Dealership {
         return vehicles;
     }
 
+    public List<Vehicle> getVehiclesByColor(String color) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getColor().equals(color))
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getPrice() >= min && vehicle.getPrice() <= max)
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
+    public List<Vehicle> getVehiclesByType(String type) {
+        List<Vehicle> vehicles = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+            if (vehicle.getVehicleType().equals(type))
+                vehicles.add(vehicle);
+        return vehicles;
+    }
+
     public String getName() {
         return name;
     }
