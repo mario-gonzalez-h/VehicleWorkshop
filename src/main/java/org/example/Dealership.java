@@ -68,6 +68,10 @@ public class Dealership {
         return name;
     }
 
+    public List<Vehicle> getInventory() {
+        return inventory;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
