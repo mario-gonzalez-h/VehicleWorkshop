@@ -106,4 +106,35 @@ public class FileManager {
 
     }
 
+    public static void saveDealership(Dealership dealership){
+
+        List<Vehicle> vehicles = dealership.getInventory();
+
+        String filePath = "src/main/resources/inventory.csv";
+
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))){
+
+            writer.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone());
+
+            writer.newLine();
+
+            for(Vehicle vehicle : vehicles){
+
+                writer.write(String.format("%d|%d|%s|%s|%s|%s|%d|$%.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice()));
+
+                writer.newLine();
+
+                vehicles.add(vehicle);
+
+            }
+
+            System.out.println("Successfully saved dealership!");
+
+        }catch(IOException ex){
+
+            System.out.println("Whoops, can't save that dealership!");
+        }
+
+    }
+
 }
