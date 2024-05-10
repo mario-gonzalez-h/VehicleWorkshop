@@ -142,6 +142,29 @@ public class Interface {
         }
 
     }
+    public void processGetByMileage(boolean isEnabled){
+        Scanner scanner = new Scanner(System.in);
+        while(isEnabled){
+            System.out.println("Filter Vehicle by Mileage: ");
+            System.out.println("Enter the lowest mileage here. ");
+            int lowestMileage = scanner.nextInt();
+            System.out.println("Enter the highest mileage here. ");
+            int highestMileage = scanner.nextInt();
+            System.out.println(dealership.getVehiclesByMileage(lowestMileage, highestMileage));
+            isEnabled = false;
+        }
+
+    }
+    public void processGetByVehicleType(boolean isEnabled){
+        Scanner scanner = new Scanner(System.in);
+        while(isEnabled){
+            System.out.println("Filter Vehicle by Vehicle Type");
+            System.out.println("Enter the vehicle type here (Ex: SUV/Van): ");
+            String vehicleType = scanner.nextLine();
+            System.out.println(dealership.getVehiclesByType(vehicleType);
+            isEnabled = false;
+        }
+    }
 
     public void processGetByYearRequest() {
         Scanner userInput = new Scanner(System.in);

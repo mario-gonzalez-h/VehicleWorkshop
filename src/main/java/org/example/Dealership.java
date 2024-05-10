@@ -7,7 +7,8 @@ import java.util.Scanner;
 import static org.example.FileManager.getVehicles;
 import static org.example.FileManager.writeVehicleToFile;
 
-public class Dealership {
+public class
+Dealership {
     private String name;
     private String address;
     private String phone;
