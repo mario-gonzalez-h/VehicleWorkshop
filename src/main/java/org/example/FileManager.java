@@ -124,8 +124,6 @@ public class FileManager {
 
                 writer.newLine();
 
-                vehicles.add(vehicle);
-
             }
 
             System.out.println("Successfully saved dealership!");
