@@ -62,10 +62,10 @@ public class Interface {
                     processGetByMakeModelRequest(true);
                     break;
                 case 3:
-                    System.out.println("Under construction!");
+                    processGetByYearRequest();
                     break;
                 case 4:
-                    System.out.println("Under construction!");
+                    processGetByColorRequest();
                     break;
                 case 5:
                     System.out.println("Under construction!");
@@ -111,7 +111,7 @@ public class Interface {
 
             System.out.println("Here are all vehicles within your price range.\n");
 
-            dealership.getVehiclesByPrice(min, max);
+            System.out.println(dealership.getVehiclesByPrice(min, max));
 
             isEnabled = false;
 
@@ -135,7 +135,7 @@ public class Interface {
 
             String model = userInput.nextLine();
 
-            dealership.getVehiclesByMakeModel(make, model);
+            System.out.println(dealership.getVehiclesByMakeModel(make, model));
 
             isEnabled = false;
 
@@ -143,4 +143,19 @@ public class Interface {
 
     }
 
+    public void processGetByYearRequest() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Here is where you filter vehicles by year.");
+        System.out.println("Enter the vehicle year here:");
+        int year = userInput.nextInt();
+        dealership.getVehiclesByYear(year);
+    }
+
+    public void processGetByColorRequest() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Here is where you filter vehicles by color.");
+        System.out.println("Enter the vehicle color here:");
+        String color = userInput.nextLine();
+        System.out.println(dealership.getVehiclesByColor(color));
+    }
 }
