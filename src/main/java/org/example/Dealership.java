@@ -13,7 +13,7 @@ public class Dealership {
         this.name = name;
         this.address = address;
         this.phone = phone;
-        inventory = new ArrayList<>();
+        inventory = FileManager.getVehicles();
     }
 
     public List<Vehicle> getVehiclesByPrice(double min, double max) {

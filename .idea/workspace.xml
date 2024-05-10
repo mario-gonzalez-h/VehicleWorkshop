@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5faa9a59-edaf-4f1b-af34-2908747ffb3f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/UnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Dealership.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Dealership.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +51,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "JUnit.UnitTest.testGetVehiclesByColor.executor": "Run",
+    "JUnit.UnitTest.testGetVehiclesByMakeModel.executor": "Run",
+    "JUnit.UnitTest.testGetVehiclesByPrice.executor": "Run",
+    "JUnit.UnitTest.testGetVehiclesByYear.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -59,9 +66,8 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Main" />
+  <component name="RunManager" selected="JUnit.UnitTest.testGetVehiclesByType">
+    <configuration name="UnitTest.testGetVehiclesByColor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="VehicleWorkshop" />
       <extension name="coverage">
         <pattern>
@@ -69,13 +75,85 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.UnitTest" />
+      <option name="METHOD_NAME" value="testGetVehiclesByColor" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnitTest.testGetVehiclesByMakeModel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VehicleWorkshop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.UnitTest" />
+      <option name="METHOD_NAME" value="testGetVehiclesByMakeModel" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnitTest.testGetVehiclesByMileage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VehicleWorkshop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.UnitTest" />
+      <option name="METHOD_NAME" value="testGetVehiclesByMileage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnitTest.testGetVehiclesByPrice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VehicleWorkshop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.UnitTest" />
+      <option name="METHOD_NAME" value="testGetVehiclesByPrice" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnitTest.testGetVehiclesByType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VehicleWorkshop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.UnitTest" />
+      <option name="METHOD_NAME" value="testGetVehiclesByType" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.UnitTest.testGetVehiclesByType" />
+        <item itemvalue="JUnit.UnitTest.testGetVehiclesByMileage" />
+        <item itemvalue="JUnit.UnitTest.testGetVehiclesByMakeModel" />
+        <item itemvalue="JUnit.UnitTest.testGetVehiclesByPrice" />
+        <item itemvalue="JUnit.UnitTest.testGetVehiclesByColor" />
       </list>
     </recent_temporary>
   </component>
@@ -101,6 +179,26 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/UnitTest.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/UnitTest.java</url>
+          <line>23</line>
+          <properties class="org.example.UnitTest" method="testGetVehiclesByMakeModel">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
