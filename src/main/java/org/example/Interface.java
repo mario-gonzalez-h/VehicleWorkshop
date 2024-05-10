@@ -77,10 +77,10 @@ public class Interface {
                     System.out.println("Under construction!");
                     break;
                 case 8:
-                    System.out.println("Under construction!");
+                    processaddVehicle();
                     break;
                 case 9:
-                    System.out.println("Under construction!");
+                    processremoveVehicleByVIN();
                     break;
                 case 99:
                     System.exit(0);
@@ -141,6 +141,21 @@ public class Interface {
 
         }
 
+    }
+    public void processaddVehicle() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Here is where you add vehicles.");
+        System.out.println("Enter the following information of the vehicle you want to add:");
+        String newVehicle = scanner.next();
+        dealership.addVehicle(newVehicle);
+    }
+
+    public void processremoveVehicleByVIN() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Here is where you Remove vehicles by VIN.");
+        System.out.println("Enter the VIN of the vehicle you want to remove:");
+        int vinToRemove = scanner.nextInt();
+        dealership.removeVehicleByVIN(vinToRemove);
     }
 
 }

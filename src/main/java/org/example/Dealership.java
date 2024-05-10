@@ -96,7 +96,7 @@ public class Dealership {
         this.phone = phone;
     }
 
-    public void addVehicle() {
+    public void addVehicle(String addNewVehicle) {
         //vin(int), year(int), make(String), model(String), VehicleType(String), Color(String), odometer(int), price(double)
         Scanner scanner = new Scanner(System.in);
         try {
