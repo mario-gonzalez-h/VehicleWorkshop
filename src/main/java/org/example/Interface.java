@@ -68,19 +68,19 @@ public class Interface {
                     processGetByColorRequest();
                     break;
                 case 5:
-                    processGetByMileage();
+                    processGetByMileage(false);
                     break;
                 case 6:
-                    processGetByVehicleType();
+                    processGetByVehicleType(false);
                     break;
                 case 7:
                     FileManager.displayVehicles(dealership.getInventory());
                     break;
                 case 8:
-                    processaddVehicle();
+                    processAddVehicle();
                     break;
                 case 9:
-                    processremoveVehicleByVIN();
+                    processRemoveVehicleByVIN();
                     break;
                 case 99:
                     System.exit(0);
@@ -161,7 +161,7 @@ public class Interface {
             System.out.println("Filter Vehicle by Vehicle Type");
             System.out.println("Enter the vehicle type here (Ex: SUV/Van): ");
             String vehicleType = scanner.nextLine();
-            System.out.println(dealership.getVehiclesByType(vehicleType);
+            System.out.println(dealership.getVehiclesByType(vehicleType));
             isEnabled = false;
         }
     }
@@ -173,7 +173,7 @@ public class Interface {
         int year = userInput.nextInt();
         dealership.getVehiclesByYear(year);
     }
-    public void processaddVehicle() {
+    public void processAddVehicle() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Here is where you add vehicles.");
         System.out.println("Enter the following information of the vehicle you want to add:");
@@ -181,7 +181,7 @@ public class Interface {
         dealership.addVehicle(newVehicle);
     }
 
-    public void processremoveVehicleByVIN() {
+    public void processRemoveVehicleByVIN() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Here is where you Remove vehicles by VIN.");
         System.out.println("Enter the VIN of the vehicle you want to remove:");
