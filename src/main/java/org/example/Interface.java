@@ -68,19 +68,19 @@ public class Interface {
                     processGetByColorRequest();
                     break;
                 case 5:
-                    processGetByMileage();
+                    processGetByMileage(true);
                     break;
                 case 6:
-                    processGetByVehicleType();
+                    processGetByVehicleType(true);
                     break;
                 case 7:
                     FileManager.displayVehicles(dealership.getInventory());
                     break;
                 case 8:
-                    processaddVehicle();
+                    processAddVehicle();
                     break;
                 case 9:
-                    processremoveVehicleByVIN();
+                    processRemoveVehicleByVIN();
                     break;
                 case 99:
                     System.exit(0);
@@ -111,7 +111,7 @@ public class Interface {
 
             System.out.println("Here are all vehicles within your price range.\n");
 
-            System.out.println(dealership.getVehiclesByPrice(min, max));
+            FileManager.displayVehicles(dealership.getVehiclesByPrice(min, max));
 
             isEnabled = false;
 
@@ -135,7 +135,7 @@ public class Interface {
 
             String model = userInput.nextLine();
 
-            System.out.println(dealership.getVehiclesByMakeModel(make, model));
+            FileManager.displayVehicles(dealership.getVehiclesByMakeModel(make, model));
 
             isEnabled = false;
 
@@ -150,7 +150,7 @@ public class Interface {
             int lowestMileage = scanner.nextInt();
             System.out.println("Enter the highest mileage here. ");
             int highestMileage = scanner.nextInt();
-            System.out.println(dealership.getVehiclesByMileage(lowestMileage, highestMileage));
+            FileManager.displayVehicles(dealership.getVehiclesByMileage(lowestMileage, highestMileage));
             isEnabled = false;
         }
 
@@ -161,7 +161,7 @@ public class Interface {
             System.out.println("Filter Vehicle by Vehicle Type");
             System.out.println("Enter the vehicle type here (Ex: SUV/Van): ");
             String vehicleType = scanner.nextLine();
-            System.out.println(dealership.getVehiclesByType(vehicleType);
+            FileManager.displayVehicles(dealership.getVehiclesByType(vehicleType));
             isEnabled = false;
         }
     }
@@ -171,17 +171,17 @@ public class Interface {
         System.out.println("Here is where you filter vehicles by year.");
         System.out.println("Enter the vehicle year here:");
         int year = userInput.nextInt();
-        dealership.getVehiclesByYear(year);
+        FileManager.displayVehicles(dealership.getVehiclesByYear(year));
     }
-    public void processaddVehicle() {
+    public void processAddVehicle() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Here is where you add vehicles.");
-        System.out.println("Enter the following information of the vehicle you want to add:");
-        String newVehicle = scanner.next();
+        System.out.println("Start by entering the VIN of the vehicle you want to add");
+        String newVehicle = "";
         dealership.addVehicle(newVehicle);
     }
 
-    public void processremoveVehicleByVIN() {
+    public void processRemoveVehicleByVIN() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Here is where you Remove vehicles by VIN.");
         System.out.println("Enter the VIN of the vehicle you want to remove:");
@@ -194,6 +194,6 @@ public class Interface {
         System.out.println("Here is where you filter vehicles by color.");
         System.out.println("Enter the vehicle color here:");
         String color = userInput.nextLine();
-        System.out.println(dealership.getVehiclesByColor(color));
+        FileManager.displayVehicles(dealership.getVehiclesByColor(color));
     }
 }
