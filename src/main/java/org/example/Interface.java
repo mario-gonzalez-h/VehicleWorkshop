@@ -68,10 +68,10 @@ public class Interface {
                     processGetByColorRequest();
                     break;
                 case 5:
-                    processGetByMileage(false);
+                    processGetByMileage(true);
                     break;
                 case 6:
-                    processGetByVehicleType(false);
+                    processGetByVehicleType(true);
                     break;
                 case 7:
                     FileManager.displayVehicles(dealership.getInventory());
@@ -171,13 +171,13 @@ public class Interface {
         System.out.println("Here is where you filter vehicles by year.");
         System.out.println("Enter the vehicle year here:");
         int year = userInput.nextInt();
-        dealership.getVehiclesByYear(year);
+        System.out.println(dealership.getVehiclesByYear(year));
     }
     public void processAddVehicle() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Here is where you add vehicles.");
-        System.out.println("Enter the following information of the vehicle you want to add:");
-        String newVehicle = scanner.next();
+        System.out.println("Start by entering the VIN of the vehicle you want to add");
+        String newVehicle = "";
         dealership.addVehicle(newVehicle);
     }
 
