@@ -188,14 +188,13 @@ Dealership {
 
 
     public void removeVehicleByVIN(int vinToRemove) {
-        List<Vehicle> vehicles = getVehicles();
-        boolean vehicleFound = false;
-        for (int i = 0; i < vehicles.size(); i++) {
-            if (vehicles.get(i).getVin() == vinToRemove) {
-                vehicles.remove(i);
-                vehicleFound = true;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).getVin() == vinToRemove) {
+                inventory.remove(i);
+                FileManager.saveDealership(this);
                 break;
             }
         }
+        System.out.println("Could not find vehicle.");
     }
 }

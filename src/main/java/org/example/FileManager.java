@@ -120,10 +120,7 @@ public class FileManager {
 
             for(Vehicle vehicle : vehicles){
 
-                writer.write(String.format("%d|%d|%s|%s|%s|%s|%d|$%.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice()));
-
-                writer.newLine();
-
+                writer.write(String.format("%d|%d|%s|%s|%s|%s|%d|%.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice()));
             }
 
             System.out.println("Successfully saved dealership!");
