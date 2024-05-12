@@ -111,7 +111,7 @@ public class Interface {
 
             System.out.println("Here are all vehicles within your price range.\n");
 
-            System.out.println(dealership.getVehiclesByPrice(min, max));
+            FileManager.displayVehicles(dealership.getVehiclesByPrice(min, max));
 
             isEnabled = false;
 
@@ -135,7 +135,7 @@ public class Interface {
 
             String model = userInput.nextLine();
 
-            System.out.println(dealership.getVehiclesByMakeModel(make, model));
+            FileManager.displayVehicles(dealership.getVehiclesByMakeModel(make, model));
 
             isEnabled = false;
 
@@ -150,7 +150,7 @@ public class Interface {
             int lowestMileage = scanner.nextInt();
             System.out.println("Enter the highest mileage here. ");
             int highestMileage = scanner.nextInt();
-            System.out.println(dealership.getVehiclesByMileage(lowestMileage, highestMileage));
+            FileManager.displayVehicles(dealership.getVehiclesByMileage(lowestMileage, highestMileage));
             isEnabled = false;
         }
 
@@ -161,7 +161,7 @@ public class Interface {
             System.out.println("Filter Vehicle by Vehicle Type");
             System.out.println("Enter the vehicle type here (Ex: SUV/Van): ");
             String vehicleType = scanner.nextLine();
-            System.out.println(dealership.getVehiclesByType(vehicleType));
+            FileManager.displayVehicles(dealership.getVehiclesByType(vehicleType));
             isEnabled = false;
         }
     }
@@ -171,7 +171,7 @@ public class Interface {
         System.out.println("Here is where you filter vehicles by year.");
         System.out.println("Enter the vehicle year here:");
         int year = userInput.nextInt();
-        System.out.println(dealership.getVehiclesByYear(year));
+        FileManager.displayVehicles(dealership.getVehiclesByYear(year));
     }
     public void processAddVehicle() {
         Scanner scanner = new Scanner(System.in);
@@ -194,6 +194,6 @@ public class Interface {
         System.out.println("Here is where you filter vehicles by color.");
         System.out.println("Enter the vehicle color here:");
         String color = userInput.nextLine();
-        System.out.println(dealership.getVehiclesByColor(color));
+        FileManager.displayVehicles(dealership.getVehiclesByColor(color));
     }
 }

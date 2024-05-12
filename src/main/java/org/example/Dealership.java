@@ -197,12 +197,5 @@ Dealership {
                 break;
             }
         }
-
-        if (vehicleFound) {
-            writeVehicleToFile((Vehicle) vehicles);
-            System.out.println("Vehicle with VIN " + vinToRemove + " has been successfully removed.");
-        } else {
-            System.out.println("No vehicle was found with VIN " + vinToRemove + ".");
-        }
     }
 }
