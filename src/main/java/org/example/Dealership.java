@@ -162,7 +162,8 @@ Dealership {
             if (inventory.get(i).getVin() == vinToRemove) {
                 inventory.remove(i);
                 FileManager.saveDealership(this);
-                break;
+                System.out.println("Vehicle removed from inventory.");
+                return;
             }
         }
         System.out.println("Could not find vehicle.");
@@ -174,22 +175,15 @@ Dealership {
             System.out.println("Enter the VIN of the vehicle you want to select:");
             int vinToSelect = Integer.parseInt(scanner.nextLine());
 
-            Vehicle selectedVehicle = null;
-
             for (Vehicle vehicle : inventory) {
                 if (vehicle.getVin() == vinToSelect) {
-                    selectedVehicle = vehicle;
-                    break;
+                    System.out.println("Selected Vehicle:");
+                    System.out.println(vehicle);
+                    return vehicle;
                 }
             }
-
-            if (selectedVehicle != null) {
-                System.out.println("Selected Vehicle:");
-                System.out.println(selectedVehicle);
-            } else {
-                System.out.println("Vehicle not found.");
-            }
-            return selectedVehicle;
+            System.out.println("Vehicle not found.");
+            return null;
         } catch (NumberFormatException ex) {
             System.out.println("Invalid input. Please enter a valid integer for the VIN.");
             return null;
@@ -215,11 +209,14 @@ Dealership {
         Vehicle selectedVehicle = selectVehicleByVIN();
         if (selectedVehicle != null) {
             // Create a SalesContract instance
-            SalesContract contract = new SalesContract(dateOfContract, customerName, customerEmail, true, 0, 0, 0, finance);
+            SalesContract contract = new SalesContract(dateOfContract, customerName, customerEmail, true, 0, 0, finance);
             contract.calculateTotalPrice();
             contract.calculateMonthlyPayment();
             ContractFileManager contractFileManager = new ContractFileManager();
-            contractFileManager.saveContract(contract, selectedVehicle);
+            contractFileManager.saveContract(contract, selectedVehicle, this); // Pass the Dealership instance
+
+            // Remove the vehicle from inventory
+            removeVehicleByVIN(selectedVehicle.getVin());
         }
     }
 
@@ -229,11 +226,17 @@ Dealership {
         Vehicle selectedVehicle = selectVehicleByVIN();
         if (selectedVehicle != null) {
             // Create a LeaseContract instance
-            LeaseContract contract = new LeaseContract(dateOfContract, customerName, customerEmail, false, 0, 0, 0, 0);
+            LeaseContract contract = new LeaseContract(dateOfContract, customerName, customerEmail, false, 0, 0);
             contract.calculateTotalPrice();
             contract.calculateMonthlyPayment();
             ContractFileManager contractFileManager = new ContractFileManager();
-            contractFileManager.saveContract(contract, selectedVehicle);
+            contractFileManager.saveContract(contract, selectedVehicle, this); // Pass the Dealership instance
+
+            // Check if the vehicle is older than 3 years before removing it
+            if (!Vehicle.vehicleIsOlderThan3Years(selectedVehicle)) {
+                // Remove the vehicle from inventory
+                removeVehicleByVIN(selectedVehicle.getVin());
+            }
         }
     }
 }

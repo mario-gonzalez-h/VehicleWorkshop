@@ -1,5 +1,7 @@
 package org.example;
 
+import java.time.Year;
+
 public class Vehicle {
     private int vin;
     private int year;
@@ -83,5 +85,11 @@ public class Vehicle {
 
     public void setPrice(double price) {
         Vehicle.price = price;
+    }
+
+    public static boolean vehicleIsOlderThan3Years(Vehicle vehicle) {
+        int currentYear = Year.now().getValue();
+        int vehicleYear = vehicle.getYear();
+        return (currentYear - vehicleYear) > 3;
     }
 }

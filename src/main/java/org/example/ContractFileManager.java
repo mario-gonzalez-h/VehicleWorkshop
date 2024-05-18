@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.time.Year;
 
 public class ContractFileManager {
-    public void saveContract(Contract contract, Vehicle selectedVehicle) {
+
+    public void saveContract(Contract contract, Vehicle selectedVehicle, Dealership dealership) {
         if (contract instanceof LeaseContract) {
             saveLeaseContract((LeaseContract) contract, selectedVehicle);
         } else if (contract instanceof SalesContract) {
@@ -14,10 +15,13 @@ public class ContractFileManager {
         } else {
             throw new IllegalArgumentException("Unsupported contract type");
         }
+
+        // After saving the contract, remove the vehicle from inventory if it's not older than 3 years
+        if (!Vehicle.vehicleIsOlderThan3Years(selectedVehicle)) {
+            dealership.removeVehicleByVIN(selectedVehicle.getVin());
+        }
     }
 
-
-    // Updated saveLeaseContract method
     private void saveLeaseContract(LeaseContract leaseContract, Vehicle selectedVehicle) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/contracts.csv", true))) {
             if (selectedVehicle != null) {
@@ -31,16 +35,8 @@ public class ContractFileManager {
 
                 if (vehicleAge > 3) {
                     System.out.println("Vehicle is older than 3 years and cannot be leased.");
-                    return;
+                    return; // Do not save the lease contract or remove the vehicle from inventory
                 }
-
-                double totalPrice = leaseContract.getTotalPrice() + Vehicle.getPrice();
-                double expectedEndingValue = totalPrice * 0.5;
-                double leaseFee = totalPrice * 0.07;
-
-
-                leaseContract.setLeaseFee(leaseFee);
-                leaseContract.calculateMonthlyPayment();
 
                 writer.write("LEASE|"
                         + leaseContract.getDateOfContract() + "|"
@@ -53,10 +49,10 @@ public class ContractFileManager {
                         + selectedVehicle.getVehicleType() + "|"
                         + selectedVehicle.getColor() + "|"
                         + selectedVehicle.getOdometer() + "|"
-                        + Vehicle.getPrice() + "|"
-                        + expectedEndingValue + "|"
-                        + leaseFee + "|"
-                        + leaseContract.getMonthlyPayment());
+                        + String.format("%.2f", selectedVehicle.getPrice()) + "|"
+                        + String.format("%.2f", leaseContract.getExpectedEndingValue()) + "|"
+                        + String.format("%.2f", leaseContract.getLeaseFee()) + "|"
+                        + String.format("%.2f", leaseContract.getMonthlyPayment()) + "\n"); // Ensure to include "\n" to separate each entry
             } else {
                 System.out.println("No vehicle selected.");
             }
@@ -68,9 +64,6 @@ public class ContractFileManager {
     private void saveSalesContract(SalesContract salesContract, Vehicle selectedVehicle) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/contracts.csv", true))) {
             if (selectedVehicle != null) {
-                double totalPrice = salesContract.getTotalPrice() + Vehicle.getPrice();
-                double initialAmount = totalPrice + salesContract.getSalesTaxAmount() +
-                        salesContract.getRecordingFee() + salesContract.getProcessingFee();
                 writer.write("SALE|"
                         + salesContract.getDateOfContract() + "|"
                         + salesContract.getCustomerName() + "|"
@@ -82,13 +75,13 @@ public class ContractFileManager {
                         + selectedVehicle.getVehicleType() + "|"
                         + selectedVehicle.getColor() + "|"
                         + selectedVehicle.getOdometer() + "|"
-                        + Vehicle.getPrice() + "|"
-                        + totalPrice + "|"
-                        + salesContract.getSalesTaxAmount() + "|"
-                        + salesContract.getRecordingFee() + "|"
-                        + salesContract.getProcessingFee() + "|"
+                        + String.format("%.2f", Vehicle.getPrice()) + "|"
+                        + String.format("%.2f", salesContract.getTotalPrice()) + "|"
+                        + String.format("%.2f", salesContract.getSalesTaxAmount()) + "|"
+                        + String.format("%.2f", salesContract.getRecordingFee()) + "|"
+                        + String.format("%.2f", salesContract.getProcessingFee()) + "|"
                         + (salesContract.isFinance() ? "YES" : "NO") + "|"
-                        + (salesContract.isFinance() ? salesContract.getMonthlyPayment() : "No finance") + "\n");
+                        + (salesContract.isFinance() ? String.format("%.2f", salesContract.getMonthlyPayment()) : "No finance") + "\n");
             } else {
                 System.out.println("No vehicle selected.");
             }
