@@ -36,8 +36,8 @@ public class LeaseContract extends Contract {
     @Override
     public void calculateMonthlyPayment() {
         double principal = getTotalPrice();
-        double interestRate = 0.04; // Example interest rate for leases
-        int months = 36;            // Example term for lease in months
+        double interestRate = 0.04; 
+        int months = 36;            
         double monthlyRate = interestRate / 12;
         double monthlyPayment = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
         setMonthlyPayment(monthlyPayment);
