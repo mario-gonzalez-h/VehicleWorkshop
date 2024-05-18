@@ -98,36 +98,6 @@ Dealership {
         this.phone = phone;
     }
 
-//    public void addVehicle(String addNewVehicle) {
-//        //vin(int), year(int), make(String), model(String), VehicleType(String), Color(String), odometer(int), price(double)
-//        Scanner scanner = new Scanner(System.in);
-//        try {
-//            System.out.println("Enter VIN: ");
-//            int inputVin = scanner.nextInt();
-//            System.out.println("Enter Year of Vehicle: ");
-//            int inputYear = scanner.nextInt();
-//            scanner.nextLine();
-//            System.out.println("Enter Make of the Vehicle: ");
-//            String inputMake = scanner.nextLine();
-//            System.out.println("Enter Model of the Vehicle: ");
-//            String inputModel = scanner.nextLine();
-//            System.out.println("Enter the Vehicle Type: Example: Car, Truck, SUV, Van. ");
-//            String inputType = scanner.nextLine();
-//            System.out.println("Enter the Color of the Vehicle: ");
-//            String inputColor = scanner.nextLine();
-//            System.out.println("Enter the odometer of the vehicle: ");
-//            int inputOdometer = scanner.nextInt();
-//            System.out.println("Enter the Price of the vehicle: ");
-//            double inputPrice = scanner.nextDouble();
-//            Vehicle newVehicle = new Vehicle(inputVin, inputYear, inputMake, inputModel, inputType, inputColor, inputOdometer, inputPrice);
-//
-//            writeVehicleToFile(newVehicle);
-//
-//            System.out.println("Vehicle has been successfully added to inventory! ");
-//        } catch (Exception ex) {
-//            System.out.println("Sorry, there was an error when adding the vehicle. Please try again. ");
-//        }
-//    }
 
     public void addVehicle(String addNewVehicle) {
         Scanner scanner = new Scanner(System.in);
@@ -196,5 +166,74 @@ Dealership {
             }
         }
         System.out.println("Could not find vehicle.");
+    }
+
+    public Vehicle selectVehicleByVIN() {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Enter the VIN of the vehicle you want to select:");
+            int vinToSelect = Integer.parseInt(scanner.nextLine());
+
+            Vehicle selectedVehicle = null;
+
+            for (Vehicle vehicle : inventory) {
+                if (vehicle.getVin() == vinToSelect) {
+                    selectedVehicle = vehicle;
+                    break;
+                }
+            }
+
+            if (selectedVehicle != null) {
+                System.out.println("Selected Vehicle:");
+                System.out.println(selectedVehicle);
+            } else {
+                System.out.println("Vehicle not found.");
+            }
+            return selectedVehicle;
+        } catch (NumberFormatException ex) {
+            System.out.println("Invalid input. Please enter a valid integer for the VIN.");
+            return null;
+        }
+    }
+
+    public void processBuyCar(String dateOfContract, String customerName, String customerEmail) {
+        // Logic for buying a car
+        System.out.println("You have selected to buy a car.");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to finance the purchase? (yes/no)");
+        String financeChoice = scanner.nextLine();
+
+        boolean finance = financeChoice.equalsIgnoreCase("yes");
+
+        if (finance) {
+            System.out.println("You have chosen to finance the purchase.");
+        } else {
+            System.out.println("You have chosen not to finance the purchase.");
+        }
+
+        Vehicle selectedVehicle = selectVehicleByVIN();
+        if (selectedVehicle != null) {
+            // Create a SalesContract instance
+            SalesContract contract = new SalesContract(dateOfContract, customerName, customerEmail, true, 0, 0, 0, finance);
+            contract.calculateTotalPrice();
+            contract.calculateMonthlyPayment();
+            ContractFileManager contractFileManager = new ContractFileManager();
+            contractFileManager.saveContract(contract, selectedVehicle);
+        }
+    }
+
+    public void processLeaseCar(String dateOfContract, String customerName, String customerEmail) {
+        // Logic for leasing a car
+        System.out.println("You have selected to lease a car.");
+        Vehicle selectedVehicle = selectVehicleByVIN();
+        if (selectedVehicle != null) {
+            // Create a LeaseContract instance
+            LeaseContract contract = new LeaseContract(dateOfContract, customerName, customerEmail, false, 0, 0, 0, 0);
+            contract.calculateTotalPrice();
+            contract.calculateMonthlyPayment();
+            ContractFileManager contractFileManager = new ContractFileManager();
+            contractFileManager.saveContract(contract, selectedVehicle);
+        }
     }
 }
