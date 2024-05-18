@@ -2,16 +2,16 @@ package org.example;
 
 public abstract class Contract {
     private String dateOfContract;
-    private String custumerName;
-    private String custumerEmail;
+    private String customerName;
+    private String customerEmail;
     private boolean vehicleSold;
     private double totalPrice;
     private double monthlyPayment;
 
-    public Contract(String dateOfContract, String custumerName, String custumerEmail, boolean vehicleSold, double totalPrice, double monthlyPayment) {
+    public Contract(String dateOfContract, String customerName, String customerEmail, boolean vehicleSold, double totalPrice, double monthlyPayment) {
         this.dateOfContract = dateOfContract;
-        this.custumerName = custumerName;
-        this.custumerEmail = custumerEmail;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
         this.vehicleSold = vehicleSold;
         this.totalPrice = totalPrice;
         this.monthlyPayment = monthlyPayment;
@@ -25,20 +25,20 @@ public abstract class Contract {
         this.dateOfContract = dateOfContract;
     }
 
-    public String getCustumerName() {
-        return custumerName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setCustumerName(String custumerName) {
-        this.custumerName = custumerName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public String getCustumerEmail() {
-        return custumerEmail;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setCustumerEmail(String custumerEmail) {
-        this.custumerEmail = custumerEmail;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
     public boolean isVehicleSold() {
@@ -49,7 +49,23 @@ public abstract class Contract {
         this.vehicleSold = vehicleSold;
     }
 
-    public abstract void getTotalPrice();
+    public double getTotalPrice() {
+        return totalPrice;
+    }
 
-    public abstract void getMonthlyPayment();
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public double getMonthlyPayment() {
+        return monthlyPayment;
+    }
+
+    public void setMonthlyPayment(double monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
+    }
+
+    // Abstract methods
+    public abstract void calculateTotalPrice();
+    public abstract void calculateMonthlyPayment();
 }

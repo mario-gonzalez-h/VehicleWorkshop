@@ -8,7 +8,7 @@ public class Vehicle {
     private String vehicleType;
     private String color;
     private int odometer;
-    private double price;
+    private static double price;
 
     public Vehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, double price) {
         this.vin = vin;
@@ -77,11 +77,11 @@ public class Vehicle {
         this.odometer = odometer;
     }
 
-    public double getPrice() {
+    public static double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        Vehicle.price = price;
     }
 }

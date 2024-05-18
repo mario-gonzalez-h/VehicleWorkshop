@@ -1,11 +1,16 @@
 package org.example;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+import java.util.List;
+
 
 public class Interface {
 
     private Dealership dealership;
+    private Contract contract;
+
 
     private void init(){
 
@@ -47,6 +52,7 @@ public class Interface {
                     7) List All Vehicles
                     8) Add A Vehicle
                     9) Remove A Vehicle
+                    10) Buy or Lease Option
                     99) Quit
                     """);
 
@@ -81,6 +87,9 @@ public class Interface {
                     break;
                 case 9:
                     processRemoveVehicleByVIN();
+                    break;
+                case 10:
+                    processBuyOrLeaseOption();
                     break;
                 case 99:
                     System.exit(0);
@@ -196,4 +205,43 @@ public class Interface {
         String color = userInput.nextLine();
         FileManager.displayVehicles(dealership.getVehiclesByColor(color));
     }
+
+    public void processBuyOrLeaseOption() {
+        LocalDate localDate = LocalDate.now();  // Automatically get today's date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateOfContract = localDate.format(formatter);  // Convert LocalDate to String in desired format
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your name: ");
+        String customerName = scanner.nextLine();
+        System.out.println("Enter your email address: ");
+        String customerEmail = scanner.nextLine();
+
+        System.out.println("Would you like to:");
+        System.out.println("1) Buy a car");
+        System.out.println("2) Lease a car");
+        System.out.print("Enter your choice: ");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (choice) {
+            case 1:
+                processBuyCar(dateOfContract, customerName, customerEmail);
+                break;
+            case 2:
+                processLeaseCar(dateOfContract, customerName, customerEmail);
+                break;
+            default:
+                System.out.println("Invalid choice.");
+        }
+    }
+
+    public void processBuyCar(String dateOfContract, String customerName, String customerEmail) {
+        dealership.processBuyCar(dateOfContract, customerName, customerEmail);
+    }
+
+    public void processLeaseCar(String dateOfContract, String customerName, String customerEmail) {
+        dealership.processLeaseCar(dateOfContract, customerName, customerEmail);
+    }
+
 }
