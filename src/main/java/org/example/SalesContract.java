@@ -5,11 +5,10 @@ public class SalesContract extends Contract {
     private double recordingFee;   // Fixed amount of $100
     private double processingFee;  // $295 if vehicle price < $10,000, otherwise $495
     private boolean finance;       // Indicates if the contract is financed
-    private double vehiclePrice;   // Price of the vehicle
 
-    public SalesContract(String dateOfContract, String customerName, String customerEmail, boolean vehicleSold, double totalPrice, double monthlyPayment, double vehiclePrice, boolean finance) {
+    public SalesContract(String dateOfContract, String customerName, String customerEmail, boolean vehicleSold, double totalPrice, double monthlyPayment, boolean finance) {
         super(dateOfContract, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
-        this.vehiclePrice = vehiclePrice;
+        double vehiclePrice = Vehicle.getPrice();  // Use the vehicle price from the Vehicle class
         this.salesTaxAmount = vehiclePrice * 0.05; // 5% sales tax
         this.recordingFee = 100.00;                // Fixed recording fee
         this.processingFee = vehiclePrice < 10000 ? 295.00 : 495.00; // Processing fee based on vehicle price
@@ -48,19 +47,9 @@ public class SalesContract extends Contract {
         this.finance = finance;
     }
 
-    public double getVehiclePrice() {
-        return vehiclePrice;
-    }
-
-    public void setVehiclePrice(double vehiclePrice) {
-        this.vehiclePrice = vehiclePrice;
-        this.salesTaxAmount = vehiclePrice * 0.05; // Recalculate sales tax
-        this.processingFee = vehiclePrice < 10000 ? 295 : 495; // Recalculate processing fee
-    }
-
     @Override
     public void calculateTotalPrice() {
-        // Calculate and set the total price
+        double vehiclePrice = Vehicle.getPrice();  // Use the vehicle price from the Vehicle class
         double totalPrice = vehiclePrice + salesTaxAmount + recordingFee + processingFee;
         setTotalPrice(totalPrice);
     }
@@ -72,19 +61,12 @@ public class SalesContract extends Contract {
             return;
         }
 
-        // Principal is the total price of the contract
         double principal = getTotalPrice();
-
-        // Interest rate and loan term based on vehicle price
+        double vehiclePrice = Vehicle.getPrice();  // Use the vehicle price from the Vehicle class
         double interestRate = vehiclePrice >= 10000 ? 0.0425 : 0.0525; // 4.25% if price >= $10,000, otherwise 5.25%
         int months = vehiclePrice >= 10000 ? 48 : 24; // 48 months if price >= $10,000, otherwise 24 months
-
-        // Monthly interest rate
         double monthlyRate = interestRate / 12;
-
-        // Monthly payment calculation
         double monthlyPayment = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
         setMonthlyPayment(monthlyPayment);
     }
-
 }
