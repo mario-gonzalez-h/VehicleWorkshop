@@ -52,7 +52,7 @@ public class ContractFileManager {
                         + String.format("%.2f", selectedVehicle.getPrice()) + "|"
                         + String.format("%.2f", leaseContract.getExpectedEndingValue()) + "|"
                         + String.format("%.2f", leaseContract.getLeaseFee()) + "|"
-                        + String.format("%.2f", leaseContract.getMonthlyPayment()) + "\n"); // Ensure to include "\n" to separate each entry
+                        + String.format("%.2f", leaseContract.getMonthlyPayment()) + "\n");
             } else {
                 System.out.println("No vehicle selected.");
             }
