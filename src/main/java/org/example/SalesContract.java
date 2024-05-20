@@ -1,17 +1,17 @@
 package org.example;
 
 public class SalesContract extends Contract {
-    private double salesTaxAmount; // 5% of the vehicle price
-    private double recordingFee;   // Fixed amount of $100
-    private double processingFee;  // $295 if vehicle price < $10,000, otherwise $495
-    private boolean finance;       // Indicates if the contract is financed
+    private double salesTaxAmount; 
+    private double recordingFee;  
+    private double processingFee; 
+    private boolean finance;  
 
     public SalesContract(String dateOfContract, String customerName, String customerEmail, boolean vehicleSold, double totalPrice, double monthlyPayment, boolean finance) {
         super(dateOfContract, customerName, customerEmail, vehicleSold, totalPrice, monthlyPayment);
-        double vehiclePrice = Vehicle.getPrice();  // Use the vehicle price from the Vehicle class
-        this.salesTaxAmount = vehiclePrice * 0.05; // 5% sales tax
-        this.recordingFee = 100.00;                // Fixed recording fee
-        this.processingFee = vehiclePrice < 10000 ? 295.00 : 495.00; // Processing fee based on vehicle price
+        double vehiclePrice = Vehicle.getPrice();  
+        this.salesTaxAmount = vehiclePrice * 0.05;
+        this.recordingFee = 100.00;                
+        this.processingFee = vehiclePrice < 10000 ? 295.00 : 495.00;
         this.finance = finance;
     }
 
@@ -49,7 +49,7 @@ public class SalesContract extends Contract {
 
     @Override
     public void calculateTotalPrice() {
-        double vehiclePrice = Vehicle.getPrice();  // Use the vehicle price from the Vehicle class
+        double vehiclePrice = Vehicle.getPrice(); 
         double totalPrice = vehiclePrice + salesTaxAmount + recordingFee + processingFee;
 
         if (finance) {
@@ -68,7 +68,9 @@ public class SalesContract extends Contract {
             return;
         }
 
-        double vehiclePrice = Vehicle.getPrice();  // Use the vehicle price from the Vehicle class
+
+        double principal = getTotalPrice();
+        double vehiclePrice = Vehicle.getPrice(); 
         double interestRate = vehiclePrice >= 10000 ? 0.0425 : 0.0525; // 4.25% if price >= $10,000, otherwise 5.25%
         int months = getLoanDurationMonths(); // 48 months if price >= $10,000, otherwise 24 months
         double monthlyRate = interestRate / 12;
