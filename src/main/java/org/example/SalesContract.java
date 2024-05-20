@@ -51,6 +51,13 @@ public class SalesContract extends Contract {
     public void calculateTotalPrice() {
         double vehiclePrice = Vehicle.getPrice();  // Use the vehicle price from the Vehicle class
         double totalPrice = vehiclePrice + salesTaxAmount + recordingFee + processingFee;
+
+        if (finance) {
+            calculateMonthlyPayment(); // Ensure monthly payment is calculated
+            double totalInterestPaid = getMonthlyPayment() * getLoanDurationMonths() - vehiclePrice;
+            totalPrice += totalInterestPaid;
+        }
+
         setTotalPrice(totalPrice);
     }
 
@@ -61,12 +68,18 @@ public class SalesContract extends Contract {
             return;
         }
 
-        double principal = getTotalPrice();
         double vehiclePrice = Vehicle.getPrice();  // Use the vehicle price from the Vehicle class
         double interestRate = vehiclePrice >= 10000 ? 0.0425 : 0.0525; // 4.25% if price >= $10,000, otherwise 5.25%
-        int months = vehiclePrice >= 10000 ? 48 : 24; // 48 months if price >= $10,000, otherwise 24 months
+        int months = getLoanDurationMonths(); // 48 months if price >= $10,000, otherwise 24 months
         double monthlyRate = interestRate / 12;
+        double principal = vehiclePrice + salesTaxAmount + recordingFee + processingFee;
+
         double monthlyPayment = (principal * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
         setMonthlyPayment(monthlyPayment);
+    }
+
+    private int getLoanDurationMonths() {
+        double vehiclePrice = Vehicle.getPrice();
+        return vehiclePrice >= 10000 ? 48 : 24;
     }
 }

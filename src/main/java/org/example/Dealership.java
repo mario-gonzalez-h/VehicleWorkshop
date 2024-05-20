@@ -169,7 +169,22 @@ Dealership {
         System.out.println("Could not find vehicle.");
     }
 
+
+
     public Vehicle selectVehicleByVIN() {
+        // Display the list of vehicles
+        for (Vehicle vehicle : inventory) {
+            System.out.printf("%d | %d | %s | %s | %s | %s | %d | $%.2f \n",
+                    vehicle.getVin(),
+                    vehicle.getYear(),
+                    vehicle.getMake(),
+                    vehicle.getModel(),
+                    vehicle.getVehicleType(),
+                    vehicle.getColor(),
+                    vehicle.getOdometer(),
+                    vehicle.getPrice());
+        }
+
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Enter the VIN of the vehicle you want to select:");
