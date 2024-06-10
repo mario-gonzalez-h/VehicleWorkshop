@@ -169,7 +169,22 @@ Dealership {
         System.out.println("Could not find vehicle.");
     }
 
+
+
     public Vehicle selectVehicleByVIN() {
+        // Display the list of vehicles
+        for (Vehicle vehicle : inventory) {
+            System.out.printf("%d | %d | %s | %s | %s | %s | %d | $%.2f \n",
+                    vehicle.getVin(),
+                    vehicle.getYear(),
+                    vehicle.getMake(),
+                    vehicle.getModel(),
+                    vehicle.getVehicleType(),
+                    vehicle.getColor(),
+                    vehicle.getOdometer(),
+                    vehicle.getPrice());
+        }
+
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Enter the VIN of the vehicle you want to select:");
@@ -191,7 +206,6 @@ Dealership {
     }
 
     public void processBuyCar(String dateOfContract, String customerName, String customerEmail) {
-        // Logic for buying a car
         System.out.println("You have selected to buy a car.");
 
         Scanner scanner = new Scanner(System.in);
@@ -208,33 +222,30 @@ Dealership {
 
         Vehicle selectedVehicle = selectVehicleByVIN();
         if (selectedVehicle != null) {
-            // Create a SalesContract instance
+    
             SalesContract contract = new SalesContract(dateOfContract, customerName, customerEmail, true, 0, 0, finance);
             contract.calculateTotalPrice();
             contract.calculateMonthlyPayment();
             ContractFileManager contractFileManager = new ContractFileManager();
-            contractFileManager.saveContract(contract, selectedVehicle, this); // Pass the Dealership instance
+            contractFileManager.saveContract(contract, selectedVehicle, this); 
 
-            // Remove the vehicle from inventory
             removeVehicleByVIN(selectedVehicle.getVin());
         }
     }
 
     public void processLeaseCar(String dateOfContract, String customerName, String customerEmail) {
-        // Logic for leasing a car
         System.out.println("You have selected to lease a car.");
         Vehicle selectedVehicle = selectVehicleByVIN();
         if (selectedVehicle != null) {
-            // Create a LeaseContract instance
+
             LeaseContract contract = new LeaseContract(dateOfContract, customerName, customerEmail, false, 0, 0);
             contract.calculateTotalPrice();
             contract.calculateMonthlyPayment();
             ContractFileManager contractFileManager = new ContractFileManager();
-            contractFileManager.saveContract(contract, selectedVehicle, this); // Pass the Dealership instance
+            contractFileManager.saveContract(contract, selectedVehicle, this); 
 
-            // Check if the vehicle is older than 3 years before removing it
+
             if (!Vehicle.vehicleIsOlderThan3Years(selectedVehicle)) {
-                // Remove the vehicle from inventory
                 removeVehicleByVIN(selectedVehicle.getVin());
             }
         }
