@@ -69,7 +69,6 @@ public class SalesContract extends Contract {
         }
 
 
-        double principal = getTotalPrice();
         double vehiclePrice = Vehicle.getPrice(); 
         double interestRate = vehiclePrice >= 10000 ? 0.0425 : 0.0525; // 4.25% if price >= $10,000, otherwise 5.25%
         int months = getLoanDurationMonths(); // 48 months if price >= $10,000, otherwise 24 months
