@@ -6,43 +6,65 @@ import java.util.List;
 
 public class FileManager {
 
-    public static List<Dealership> getDealership(){
-
+    public static List<Dealership> getDealerships() {
         List<Dealership> dealerships = new ArrayList<>();
 
         String filePath = "src/main/resources/inventory.csv";
 
-        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 
             String line;
-            while((line = reader.readLine()) != null){
+            Dealership dealership = null;
+            List<Vehicle> inventory = new ArrayList<>();
+
+            while ((line = reader.readLine()) != null) {
 
                 String[] data = line.split("\\|");
 
-                if (data.length <= 3) {
+                if (data.length == 3) {
+                    if (dealership != null) {
+                        dealership.setInventory(inventory);
+                        dealerships.add(dealership);
+                    }
                     String name = data[0];
                     String address = data[1];
                     String phoneNumber = data[2];
+                    dealership = new Dealership(name, address, phoneNumber);
+                    inventory = new ArrayList<>();
+                } else if (data.length > 3) {
+                    int vin = Integer.parseInt(data[0]);
+                    int year = Integer.parseInt(data[1]);
+                    String make = data[2];
+                    String model = data[3];
+                    String vehicleType = data[4];
+                    String color = data[5];
+                    int odometer = Integer.parseInt(data[6]);
+                    double price = Double.parseDouble(data[7]);
 
-                    Dealership dealership = new Dealership(name, address, phoneNumber);
-                    dealerships.add(dealership);
+                    Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+                    inventory.add(vehicle);
                 }
 
             }
-        }catch(IOException ex){
+            if (dealership != null) {
+                dealership.setInventory(inventory);
+                dealerships.add(dealership);
+            }
+        } catch (IOException ex) {
             System.out.println("Whoops, can't read that dealership!");
         }
 
         return dealerships;
     }
 
-    public static void displayDealership(List<Dealership> dealerships){
-
-        for (Dealership dealership : dealerships){
-            System.out.printf("%s, %s, %s \n", dealership.getName(), dealership.getAddress(), dealership.getPhone());
+    public static void displayDealerships(List<Dealership> dealerships) {
+        for (int i = 0; i < dealerships.size(); i++) {
+            Dealership dealership = dealerships.get(i);
+            System.out.printf("%d) %s, %s, %s \n", i + 1, dealership.getName(), dealership.getAddress(), dealership.getPhone());
         }
-
     }
+
+
 
     public static List<Vehicle> getVehicles(){
 
