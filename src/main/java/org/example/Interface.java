@@ -12,55 +12,43 @@ public class Interface {
     private Contract contract;
 
 
-    private void init(){
+    private List<Dealership> dealerships;
 
-        List<Dealership> dealerships = FileManager.getDealership();
-
-        this.dealership = dealerships.get(0);
-
+    private void init() {
+        this.dealerships = FileManager.getDealerships();
     }
 
-    public void homeScreen(){
+    public void homeScreen() {
 
-        while(true){
+        init();
+        selectDealership();
 
-            init();
+        while (true) {
 
-            System.out.println("""
-                                               _.-="_-         _
-                                             _.-="   _-          | ||""\"""\""---._______     __..
-                                 ___.===""\""-.______-,,,,,,,,,,,,`-''----" ""\"""       ""\"""  __'
-                          __.--""     __        ,'                   o \\           __        [__|
-                     __-""=======.--""  ""--.=================================.--""  ""--.=======:
-                    ]       [w] : /        \\ : |========================|    : /        \\ :  [w] :
-                    V___________:|          |: |========================|    :|          |:   _-"
-                     V__________: \\        / :_|=======================/_____: \\        / :__-"
-                     -----------'  "-____-"  `-------------------------------'  "-____-"
-                    """);
-
-            System.out.println("\nWelcome to the inventory manager of " + dealership.getName() +", esteemed employee!");
+            System.out.println("\nYou are currently managing the inventory of " + dealership.getName());
 
             System.out.println("Now, what would you like to do? Select a number to get started.");
 
             System.out.println("""
-                    1) Find Vehicles By Price Range
-                    2) Find Vehicles By Make/Model
-                    3) Find Vehicles By Year Range
-                    4) Find Vehicles By Color
-                    5) Find Vehicles By Mileage Range
-                    6) Find Vehicles By Vehicle Type
-                    7) List All Vehicles
-                    8) Add A Vehicle
-                    9) Remove A Vehicle
-                    10) Buy or Lease Option
-                    99) Quit
-                    """);
+                1) Find Vehicles By Price Range
+                2) Find Vehicles By Make/Model
+                3) Find Vehicles By Year Range
+                4) Find Vehicles By Color
+                5) Find Vehicles By Mileage Range
+                6) Find Vehicles By Vehicle Type
+                7) List All Vehicles
+                8) Add A Vehicle
+                9) Remove A Vehicle
+                10) Buy or Lease Option
+                11) Switch Dealership
+                99) Quit
+                """);
 
             Scanner userInput = new Scanner(System.in);
 
             int homeScreenInput = Integer.parseInt(userInput.nextLine());
 
-            switch(homeScreenInput){
+            switch (homeScreenInput) {
                 case 1:
                     processGetByPriceRequest(true);
                     break;
@@ -91,16 +79,43 @@ public class Interface {
                 case 10:
                     processBuyOrLeaseOption();
                     break;
+                case 11:
+                    switchDealership();
+                    break;
                 case 99:
                     System.exit(0);
                     break;
                 default:
                     System.out.println("Oops, that's not an option!");
             }
+        }
+    }
 
+
+
+    private void selectDealership() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please select a dealership from the following list:");
+
+        FileManager.displayDealerships(dealerships);
+
+        int selection = -1;
+        while (selection < 1 || selection > dealerships.size()) {
+            System.out.print("Enter the number of the dealership: ");
+            selection = scanner.nextInt();
+            scanner.nextLine(); // consume newline
         }
 
+        this.dealership = dealerships.get(selection - 1);
     }
+
+    private void switchDealership() {
+        selectDealership();
+        System.out.println("Switched to " + dealership.getName());
+    }
+
+
 
     public void processGetByPriceRequest(boolean isEnabled){
 

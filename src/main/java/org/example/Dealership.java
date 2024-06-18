@@ -22,6 +22,10 @@ Dealership {
         inventory = getVehicles();
     }
 
+    public void setInventory(List<Vehicle> inventory) {
+        this.inventory = inventory;
+    }
+
     public List<Vehicle> getVehiclesByPrice(double min, double max) {
         List<Vehicle> vehicles = new ArrayList<>();
         for (Vehicle vehicle : inventory)
